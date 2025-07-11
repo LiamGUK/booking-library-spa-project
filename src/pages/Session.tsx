@@ -26,11 +26,14 @@ export default function SessionPage() {
     <main id="session-page">
       {isBookingOpen && <SessionAction id={sessionId} type="book" />}
       <article>
-        <header>
+        <header className="flex flex-row items-center max-sm:mb-16 max-sm:flex-col">
           <img src={loadedSession.image} alt={loadedSession.title} />
-          <div>
+          <div className="ml-8">
             <h2>{loadedSession.title}</h2>
-            <time dateTime={new Date(loadedSession.date).toISOString()}>
+            <time
+              className="mb-12 block"
+              dateTime={new Date(loadedSession.date).toISOString()}
+            >
               {new Date(loadedSession.date).toLocaleDateString("en-US", {
                 day: "numeric",
                 month: "short",

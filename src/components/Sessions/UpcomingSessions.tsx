@@ -16,7 +16,9 @@ function UpcomingSessions() {
           <UpcomingSessionItem key={booking} id={booking} />
         ))
       ) : (
-        <p>No Bookings made</p>
+        <p className="mb-[2rem] text-[1.6rem] leading-tight">
+          No Bookings made
+        </p>
       )}
 
       <div className="actions">

@@ -34,7 +34,7 @@ function UpcomingSession({ id }: BookSessionProps) {
         ref={emailRef}
         required
       />
-      <div className="actions">
+      <div className="actions mt-[3rem]">
         <Button type="button" textOnly={true} onMethod={handleCloseModal}>
           Cancel
         </Button>
