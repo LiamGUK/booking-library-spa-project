@@ -23,10 +23,13 @@ const Modal = forwardRef<OpenModal, PropsWithChildren>(function Modal(
   });
 
   return createPortal(
-    <dialog className="modal" ref={dialogRef}>
+    <dialog
+      className="modal absolute top-2/4 left-2/4 min-h-[10rem] translate-x-[-50%] translate-y-[-50%] px-[3rem] py-[2rem]"
+      ref={dialogRef}
+    >
       {children}
     </dialog>,
-    document.getElementById("modal-root")!
+    document.getElementById("modal-root")!,
   );
 });
 

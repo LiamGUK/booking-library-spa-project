@@ -1,5 +1,5 @@
-import { type ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { type ReactNode } from "react";
 
 interface ButtonProps {
   type: "button";
@@ -19,7 +19,9 @@ type ComponentProps = ButtonProps | LinkProps;
 
 function Button({ children, ...props }: ComponentProps) {
   const { type, textOnly } = props;
-  const btnStyle = textOnly ? "button button--text-only" : "button";
+  const btnStyle = textOnly
+    ? "button button--text-only text-lg sm:text-2xl"
+    : "button text-lg sm:text-2xl";
 
   if (type === "button") {
     const { onMethod } = props;
