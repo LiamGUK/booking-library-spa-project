@@ -1,4 +1,4 @@
-import { type PropsWithChildren } from "react";
+import { useEffect, type PropsWithChildren } from "react";
 import NavListItem from "./NavListItem";
 import Button from "./Button";
 
@@ -6,6 +6,7 @@ export interface LinkOptions {
   id: string;
   to: string;
   text: string;
+  onMethod?: () => void;
 }
 
 interface NavConfig {
@@ -19,10 +20,10 @@ function NavMenu({ children }: PropsWithChildren) {
   return <>{children}</>;
 }
 
-function NavItem({ to, text, id }: LinkOptions) {
+function NavItem({ to, text, id, onMethod }: LinkOptions) {
   return (
     <NavListItem id={id}>
-      <Button type="link" to={to} textOnly={true}>
+      <Button type="link" to={to} textOnly={true} onMethod={onMethod}>
         {text}
       </Button>
     </NavListItem>
@@ -31,10 +32,21 @@ function NavItem({ to, text, id }: LinkOptions) {
 
 // Use session context to extract burger menu state values and methods
 function NavList({ type, linkContent, burgerOpen, handleBurger }: NavConfig) {
+  useEffect(
+    function () {
+      if (burgerOpen) {
+        document.querySelector("html")!.style.overflowY = "hidden";
+      } else {
+        document.querySelector("html")!.removeAttribute("style");
+      }
+    },
+    [burgerOpen],
+  );
+
   if (type === "mobile") {
     return (
       <nav
-        className="absolute top-0 left-0 h-full w-full transition-transform duration-400 xs:w-[60vw] md:hidden"
+        className="absolute top-0 left-0 z-10 h-full w-full transition-transform duration-400 xs:w-[60vw] md:hidden"
         style={
           burgerOpen
             ? {
@@ -61,6 +73,7 @@ function NavList({ type, linkContent, burgerOpen, handleBurger }: NavConfig) {
               to={linkItem.to}
               text={linkItem.text}
               id={linkItem.id}
+              onMethod={handleBurger}
             />
           ))}
         </ul>

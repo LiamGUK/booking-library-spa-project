@@ -12,6 +12,7 @@ interface LinkProps {
   type: "link";
   to: string;
   textOnly: boolean;
+  onMethod?: () => void;
   children: ReactNode;
 }
 
@@ -26,16 +27,16 @@ function Button({ children, ...props }: ComponentProps) {
   if (type === "button") {
     const { onMethod } = props;
     return (
-      <button onClick={onMethod} className={btnStyle}>
+      <button className={btnStyle} onClick={onMethod}>
         {children}
       </button>
     );
   }
 
-  const { to } = props;
+  const { to, onMethod } = props;
 
   return (
-    <Link to={to} className={btnStyle}>
+    <Link to={to} className={btnStyle} onClick={onMethod}>
       {children}
     </Link>
   );
